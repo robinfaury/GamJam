@@ -24,6 +24,12 @@ Parser::~Parser(void){
 	m.~Map();
 }
 
+void Parser::setMap(Map m2){
+	m = m2;
+}
+
+
+
 void Parser::loadLevel( std::string path) {
 	
 	std::ifstream fichier(path.c_str(), std::ios::in);
@@ -32,6 +38,7 @@ void Parser::loadLevel( std::string path) {
 	{
 		int height,width;
 		fichier >> height >> width;
+
 		//allocate the array
 		int** arr = new int*[height];
 		for (int i = 0; i < height; i++)
@@ -47,11 +54,9 @@ void Parser::loadLevel( std::string path) {
 				arr[i][j] = tmp;
 			}
 		}
-
-		
-		
 		m = Map(height, width, arr);
 
+		//deallocate the array
 		for (int i = 0; i < height; i++)
 			delete[] arr[i];
 		delete[] arr;
@@ -67,6 +72,22 @@ void Parser::loadLevel( std::string path) {
  * @param string
  * @return void
  */
-void Parser::saveLevel( std::string) {
-    return;
+void Parser::saveLevel( std::string path) {
+
+	std::ofstream fichier(path.c_str(), std::ios::out | std::ios::trunc);
+
+	if (fichier)
+	{
+		fichier << m.getheight() << " " << m.getwidth() << std::endl;
+		int ** grid = m.getgrid();
+		for (int i = 0; i < m.getheight(); i++)
+		{
+			for (int j = 0; j < m.getwidth(); j++)
+			{
+				fichier << grid[i][j] << " ";
+			}
+			fichier << std::endl;
+		}
+	}
+	
 }

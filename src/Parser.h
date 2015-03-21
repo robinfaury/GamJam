@@ -20,6 +20,10 @@ public:
 	Parser(void);
 
 	~Parser(void);
+
+	void setMap(Map);
+	
+
     /**
      * @param string
      */
