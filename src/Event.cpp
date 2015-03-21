@@ -8,14 +8,3 @@
 /**
  * Event implementation
  */
-
-
-Event::Event(void)
-{
-
-}
-
-Event::~Event(void)
-{
-
-}

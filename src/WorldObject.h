@@ -6,16 +6,13 @@
 #ifndef _WORLDOBJECT_H
 #define _WORLDOBJECT_H
 
+#include <glm.hpp>
 
-class WorldObject
+class WorldObject 
 {
-private:
-
-public:
-	WorldObject(void);
-
-	~WorldObject(void);
-
+public: 
+    glm::vec2 position;
+    glm::vec2 size;
 };
 
 #endif //_WORLDOBJECT_H

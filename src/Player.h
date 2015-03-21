@@ -6,16 +6,10 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
+#include "DynamicObject.h"
 
-class Player
-{
-private:
 
-public:
-	Player(void);
-
-	~Player(void);
-
+class Player: public DynamicObject {
 };
 
 #endif //_PLAYER_H

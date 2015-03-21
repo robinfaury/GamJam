@@ -8,15 +8,3 @@
 /**
  * GraphicView implementation
  */
-
-
-GraphicView::GraphicView(void)
-{
-
-}
-
-GraphicView::~GraphicView(void)
-{
-
-}
-
