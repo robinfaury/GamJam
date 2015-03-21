@@ -6,7 +6,7 @@
 #ifndef _WORLDOBJECT_H
 #define _WORLDOBJECT_H
 
-class WorldObject {
+class WorldObject { 
 };
 
 #endif //_WORLDOBJECT_H

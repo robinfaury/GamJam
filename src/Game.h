@@ -6,7 +6,7 @@
 #ifndef _GAME_H
 #define _GAME_H
 
-class Game {
+class Game { 
 };
 
 #endif //_GAME_H

@@ -6,7 +6,7 @@
 #ifndef _BLOCK_H
 #define _BLOCK_H
 
-class Block {
+class Block { 
 };
 
 #endif //_BLOCK_H
