@@ -10,6 +10,7 @@
 
 
 class Player: public DynamicObject {
+
 };
 
 #endif //_PLAYER_H
