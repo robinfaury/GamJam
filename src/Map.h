@@ -8,18 +8,21 @@
 
 #include <iostream>
 
+#include "Parser.h"
+
 class Map 
 {
 private:
 	int** grid;
     int height;
     int width;
+	Parser parser;
 
 public: 
     
 	Map(void);
 
-	Map(int h,int w, int** g);
+	void loadLevel(int i);
 
 	~Map(void);
 

@@ -20,17 +20,18 @@ private:
 	World* world;
 	sf::RenderWindow* window;
 
+
 	std::vector<sf::Texture> blocTextures;
 	std::vector<sf::Sprite> sprites;
 
 public:
-	GraphicView();
+	GraphicView(){}
+	GraphicView(World* world);
 
 	void Init(int height, int width);
-	int CheckEvent();
 	void Draw();
 
-	void SetWorld(World* world);
+	sf::RenderWindow* getWindow() {return this->window;}
 
 	~GraphicView();
 };
