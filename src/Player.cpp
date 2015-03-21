@@ -8,15 +8,3 @@
 /**
  * Player implementation
  */
-
-
-Player::Player(void)
-{
-
-}
-
-Player::~Player(void)
-{
-
-}
-

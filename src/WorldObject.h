@@ -6,16 +6,11 @@
 #ifndef _WORLDOBJECT_H
 #define _WORLDOBJECT_H
 
-
-class WorldObject
-{
-private:
-
-public:
-	WorldObject(void);
-
-	~WorldObject(void);
-
+class WorldObject {
+public: 
+    vector2 position;
+    vector size;
+    void pysiqueAttribute;
 };
 
 #endif //_WORLDOBJECT_H

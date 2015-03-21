@@ -6,16 +6,12 @@
 #ifndef _WORLD_H
 #define _WORLD_H
 
-
-class World
-{
-private:
-
-public:
-	World(void);
-
-	~World(void);
-
+class World {
+public: 
+    void listeWorldObject;
+    void plistDyn;
+    
+    void MoveBlock();
 };
 
 #endif //_WORLD_H

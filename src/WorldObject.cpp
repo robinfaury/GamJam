@@ -8,14 +8,3 @@
 /**
  * WorldObject implementation
  */
-
-
-WorldObject::WorldObject(void)
-{
-
-}
-
-WorldObject::~WorldObject(void)
-{
-
-}

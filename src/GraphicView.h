@@ -6,16 +6,7 @@
 #ifndef _GRAPHICVIEW_H
 #define _GRAPHICVIEW_H
 
-
-class GraphicView
-{
-private:
-
-public:
-	GraphicView(void);
-
-	~GraphicView(void);
-
+class GraphicView {
 };
 
 #endif //_GRAPHICVIEW_H

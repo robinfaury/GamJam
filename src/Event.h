@@ -6,16 +6,7 @@
 #ifndef _EVENT_H
 #define _EVENT_H
 
- 
-class Event
-{
-private:
-
-public:
-	Event(void);
-
-	~Event(void);
-
+class Event {
 };
 
 #endif //_EVENT_H

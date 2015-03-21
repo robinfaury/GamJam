@@ -10,12 +10,9 @@
  */
 
 
-World::World(void)
-{
-
-}
-
-World::~World(void)
-{
-
+/**
+ * @return void
+ */
+void World::MoveBlock() {
+    return;
 }
