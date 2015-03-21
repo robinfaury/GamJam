@@ -11,10 +11,13 @@ int main(int argc, char* argv[])
 		music.play();
 	
 		music.setLoop(true);
-		
-		InfoBull("boobs");
-	
+
 		std::cin.get();
+
+		Game boobs;
+		boobs.init();
+		boobs.run();
+
 
 	return 0;
 } 

@@ -9,9 +9,9 @@
  * GraphicView implementation
  */
 
-GraphicView::GraphicView()
+GraphicView::GraphicView(World* world)
 {
-
+	this->world = world;
 }
 
 void GraphicView::Init(int height, int width)
@@ -19,7 +19,8 @@ void GraphicView::Init(int height, int width)
 	this->window = new sf::RenderWindow(sf::VideoMode(height, width), "boobs");
 	this->window->setVerticalSyncEnabled(true);
 
-	for (int i=1; i<=5; ++i)
+	Map* map = this->world->getMap();
+	for (int i=1; i<=map->getMaxIDTexture(); ++i)
 	{
 		std::string filename("../GamJam/res/textures/blocs/bloc");
 		if (i<10)
@@ -34,13 +35,20 @@ void GraphicView::Init(int height, int width)
 		std::cout<<filename<<std::to_string(i)<<".png is loaded"<<std::endl;
 	}
 
-	for (int x=0; x<30; ++x)
+	for (int x=0; x<map->getwidth(); ++x)
 	{
-		for (int y=0; y<30; ++y)
+		for (int y=0; y<map->getheight(); ++y)
+			std::cout<<map->getgrid()[x][y];
+		std::cout<<std::endl;
+	}
+	for (int x=0; x<map->getwidth(); ++x)
+	{
+		for (int y=0; y<map->getheight(); ++y)
 		{
 			this->sprites.push_back(sf::Sprite());
-			this->sprites[this->sprites.size()-1].setTexture(this->blocTextures[0]);
-			this->sprites[this->sprites.size()-1].setPosition(x*30, y*30);
+			if (map->getgrid()[x][y] != 0)
+				this->sprites[this->sprites.size()-1].setTexture(this->blocTextures[map->getgrid()[x][y]-1]);
+			this->sprites[this->sprites.size()-1].setPosition(y*30, x*30);
 		}
 	}
 	this->sprites.push_back(sf::Sprite());
@@ -48,19 +56,6 @@ void GraphicView::Init(int height, int width)
 	this->sprites[this->sprites.size()-1].setPosition(50, 50);
 }
 
-int GraphicView::CheckEvent()
-{
-	sf::Event event;
-    while (this->window->pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-		{
-            this->window->close();
-			return 1;
-		}
-    }
-	return 0;
-}
 
 void GraphicView::Draw()
 {
@@ -72,11 +67,6 @@ void GraphicView::Draw()
 	}
 
 	window->display();
-}
-
-void GraphicView::SetWorld(World* world)
-{
-	this->world = world;
 }
 
 GraphicView::~GraphicView()

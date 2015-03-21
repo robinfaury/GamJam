@@ -17,49 +17,41 @@
 
 Parser::Parser(void)
 {
-	m = Map();
+
 }
 
-Parser::~Parser(void){
-	m.~Map();
-}
+Parser::~Parser(void)
+{
 
-void Parser::setMap(Map m2){
-	m = m2;
 }
 
 
 
-void Parser::loadLevel( std::string path) {
+void Parser::loadLevel( std::string path, int*** arr, int* height, int*width) 
+{
 	
 	std::ifstream fichier(path.c_str(), std::ios::in);
 	
+
 	if (fichier)
 	{
-		int height,width;
-		fichier >> height >> width;
+		fichier >> *height >> *width;
 
 		//allocate the array
-		int** arr = new int*[height];
-		for (int i = 0; i < height; i++)
-			arr[i] = new int[width];
+		*arr = new int*[*width];
+		for (int i = 0; i < *width; i++)
+			(*arr)[i] = new int[*height];
 
 		
-		for (int i = 0; i < height; i++)
+		for (int x = 0; x < *width; x++)
 		{
-			for (int j = 0; j < width; j++)
+			for (int y = 0; y < *height; y++)
 			{
 				int tmp;
 				fichier >> tmp;
-				arr[i][j] = tmp;
+				(*arr)[x][y] = tmp;
 			}
 		}
-		m = Map(height, width, arr);
-
-		//deallocate the array
-		for (int i = 0; i < height; i++)
-			delete[] arr[i];
-		delete[] arr;
 
 		fichier.close();
 
@@ -73,19 +65,19 @@ void Parser::loadLevel( std::string path) {
  * @param string
  * @return void
  */
-void Parser::saveLevel( std::string path) {
+void Parser::saveLevel( std::string path, int** grid, int height, int width) 
+{
 
 	std::ofstream fichier(path.c_str(), std::ios::out | std::ios::trunc);
 
 	if (fichier)
 	{
-		fichier << m.getheight() << " " << m.getwidth() << std::endl;
-		int ** grid = m.getgrid();
-		for (int i = 0; i < m.getheight(); i++)
+		fichier << height << " " << width << std::endl;
+		for (int x = 0; x < width; x++)
 		{
-			for (int j = 0; j < m.getwidth(); j++)
+			for (int y = 0; y < height; y++)
 			{
-				fichier << grid[i][j] << " ";
+				fichier << grid[x][y] << " ";
 			}
 			fichier << std::endl;
 		}

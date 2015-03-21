@@ -7,18 +7,22 @@
 #include <chrono>
 
 #include "GraphicView.h"
-#include "Parser.h"
+#include "World.h"
+#include "Event.h"
 
 class Game 
 {
 private: 
 	GraphicView SFMLView;
-	Parser p;
+	Event event;
+
+	World world;
     bool editor;
 
 public:
 	Game();
 
+	void init();
 	void changeLevel(int i);
 	void run();
 

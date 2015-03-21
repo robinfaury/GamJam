@@ -12,6 +12,7 @@
 
 InfoBull::InfoBull(std::string s)
 {
+
 	sf::Text text;
 	sf::Font font;
 
@@ -75,8 +76,6 @@ InfoBull::InfoBull(std::string s)
 		window.display();
 	}
 
+
 }
 
-InfoBull::~InfoBull(void){
-	
-}
