@@ -48,8 +48,6 @@ void Parser::loadLevel( std::string path) {
 			}
 		}
 
-		
-		
 		m = Map(height, width, arr);
 
 		for (int i = 0; i < height; i++)
@@ -57,9 +55,10 @@ void Parser::loadLevel( std::string path) {
 		delete[] arr;
 
 		fichier.close();
+
 	}
 	else
-		std::cerr << "Impossible d'ouvrir" << std::endl;
+		std::cout << "Impossible d'ouvrir le level" << std::endl;
     
 }
 

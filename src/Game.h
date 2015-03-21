@@ -19,7 +19,7 @@ private:
 public:
 	Game();
 
-	void changeLevel();
+	void changeLevel(int i);
 	void run();
 
 	~Game();
