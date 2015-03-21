@@ -24,6 +24,10 @@ public:
 
 	int CheckEvent();
 
+	bool mouseRightPress() {return sf::Mouse::isButtonPressed(sf::Mouse::Right);}
+	bool mouseLeftPress() {return sf::Mouse::isButtonPressed(sf::Mouse::Left);}
+	bool mouseMiddlePress() {return sf::Mouse::isButtonPressed(sf::Mouse::Middle);}
+
 	~Event();
 };
 

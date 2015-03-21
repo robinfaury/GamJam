@@ -8,13 +8,11 @@
 
 #include "GraphicView.h"
 #include "World.h"
-#include "Event.h"
 
 class Game 
 {
 private: 
 	GraphicView SFMLView;
-	Event event;
 
 	World world;
     bool editor;

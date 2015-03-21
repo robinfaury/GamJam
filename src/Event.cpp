@@ -30,6 +30,14 @@ int Event::CheckEvent()
             this->window->close();
 			return 1;
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+		{
+			return 2;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1))
+		{
+			return 3;
+		}
     }
 	return 0;
 }

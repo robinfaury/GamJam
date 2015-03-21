@@ -31,7 +31,7 @@ Map::~Map(void)
 {
 	
 	//deallocate the array
-	for (int i = 0; i < this->height; i++)
+	for (int i = 0; i < this->width; i++)
 		delete[] this->grid[i];
 	delete[] this->grid;
 }

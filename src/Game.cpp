@@ -18,7 +18,6 @@ void Game::init()
 {
 	this->changeLevel(1);
 	this->SFMLView.Init(30*30, 30*30);
-	this->event = Event(this->SFMLView.getWindow());
 }
 
 void Game::changeLevel(int i)
@@ -33,12 +32,11 @@ void Game::run()
 	{
 		auto start_time = std::chrono::high_resolution_clock::now();
 
-		eventID = this->event.CheckEvent();
-
+		eventID = this->SFMLView.computeEvent();
 		this->SFMLView.Draw();
 
 		auto end_time = std::chrono::high_resolution_clock::now();
-		std::cout <<"frame time : "<< std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count() << std::endl;
+		//std::cout <<"frame time : "<< std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time).count() << std::endl;
 	}
 }
 

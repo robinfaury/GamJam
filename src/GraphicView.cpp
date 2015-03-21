@@ -18,6 +18,7 @@ void GraphicView::Init(int height, int width)
 {
 	this->window = new sf::RenderWindow(sf::VideoMode(height, width), "boobs");
 	this->window->setVerticalSyncEnabled(true);
+	this->event = Event(this->window);
 
 	Map* map = this->world->getMap();
 	for (int i=1; i<=map->getMaxIDTexture(); ++i)
@@ -56,14 +57,39 @@ void GraphicView::Init(int height, int width)
 	this->sprites[this->sprites.size()-1].setPosition(50, 50);
 }
 
+int GraphicView::computeEvent()
+{
+	int eventID = this->event.CheckEvent();
+	std::cout<<eventID;
+	if (eventID == 2)
+	{
+		this->editor = true;
+	}
+	if (eventID == 3)
+	{
+		this->currentSprite.setTexture(this->blocTextures[0]);
+	}
+	if (this->editor)
+	{
+		this->currentSprite.setPosition(sf::Mouse::getPosition(*this->window).x-15, sf::Mouse::getPosition(*this->window).y-15);
+	}
+
+	return eventID;
+}
+
 
 void GraphicView::Draw()
 {
 	window->clear(sf::Color::Black);
 
-	for (std::vector<sf::Sprite>::iterator currentSprite = this->sprites.begin(); currentSprite	!= this->sprites.end(); ++currentSprite)
+	for (std::vector<sf::Sprite>::iterator it = this->sprites.begin(); it	!= this->sprites.end(); ++it)
 	{
-		window->draw(*currentSprite);
+		window->draw(*it);
+	}
+	if (this->editor)
+	{
+		if (this->editor)
+			window->draw(this->currentSprite);
 	}
 
 	window->display();
