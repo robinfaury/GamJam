@@ -14,25 +14,29 @@ private:
 	double life;
 	double experience;
 	int level;
+	int gender; // 0 for Male, 1 for Female
 
 public:
 
 	//------------------ Constructors --------------------
 
 	Player();
-	Player(glm::vec2 position, glm::vec2 size, Orientation orientation);
+	Player(int gender);
+	Player(glm::vec2 position, glm::vec2 size, Orientation orientation, int gender);
 
 	//-------------------- Getters -----------------------
 
 	double getLife();
 	double getExperience();
 	int getLevel();
+	int getGender();
 
 	//-------------------- Setters -----------------------
 
 	void setLife(double life);
 	void setExperience(double experience);
 	void setLevel(int level);
+	void setGender(int gender);
 
 	//------------------ State Changes -------------------
 

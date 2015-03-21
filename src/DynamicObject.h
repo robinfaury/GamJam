@@ -16,6 +16,9 @@ protected:
 
 	Orientation orientation;
 	glm::vec2 velocity;
+	glm::vec2 acceleration;
+	glm::vec2 direction;
+	glm::vec2 rotation;
 
 	double maxSpeed;
 	double maxAcceleration;
@@ -32,6 +35,9 @@ public:
 
 	Orientation getOrientation();
 	glm::vec2 getVelocity();
+	glm::vec2 getAcceleration();
+	glm::vec2 getDirection();
+	glm::vec2 getRotation();
 
 	double getMaxSpeed();
 	double getMaxAcceleration();
@@ -41,6 +47,13 @@ public:
 	
 	void setOrientation(Orientation orientation);
 	void setVelocity(glm::vec2 velocity);
+	void setAcceleration(glm::vec2 acceleration);
+	void setDirection(glm::vec2 direction);
+	void setRotation(glm::vec2 rotation);
+
+	void setMaxSpeed(double maxSpeed);
+	void setMaxAcceleration(double maxAcceleration);
+	void setMass(double mass);
 
 	//------------------- Movement -----------------------
 
