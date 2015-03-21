@@ -9,6 +9,7 @@
 
 class DynamicBlock: public DynamicObject 
 {
+
 private:
 
 	int type;

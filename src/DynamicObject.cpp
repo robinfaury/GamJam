@@ -64,8 +64,8 @@ void DynamicObject::setVelocity(glm::vec2 velocity)
 
 void DynamicObject::move(glm::vec2 gravity, int time) 
 {
-	/*
-	position += time * velocity;
+	/*glm::vec2
+	position = time * velocity;
 	velocity += acceleration * time;
 	if (acceleration > maxAcceleration)
 	{

@@ -2,7 +2,7 @@
  * Player: AI player moving forward in the world, helped by the human player to reach the end of the level, inherits from DynamicObject
  **/
 
-#ifndef _PLAYER_H goal
+#ifndef _PLAYER_H
 #define _PLAYER_H
 
 #include "DynamicObject.h"

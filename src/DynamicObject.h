@@ -9,7 +9,7 @@
 #include "WorldObject.h"
 #include "Orientation.h"
 
-class DynamicObject: public WorldObject 
+class DynamicObject : public WorldObject 
 {
 
 protected:
