@@ -6,5 +6,14 @@
 #include "InfoBull.h"
 
 /**
- * Blocks implementation
+ * InfoBull implementation
  */ 
+
+InfoBull::InfoBull(void)
+{
+	m_OkBtn.SetTooltip("Valider les données");
+}
+
+InfoBull::~InfoBull(void){
+	
+}

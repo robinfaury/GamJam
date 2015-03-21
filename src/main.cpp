@@ -7,8 +7,11 @@ int main(int argc, char* argv[])
 	sf::Music music;
 	if (!music.openFromFile("../GamJam/res/music.ogg"))
 		std::cout << "fail";
-
-	music.play();
+	
+		music.play();
+	
+		music.setLoop(true);
+	
 
 	
 	Game boobs;
