@@ -9,6 +9,8 @@
 class Game {
 public: 
     bool editor;
+private:
+	Game();
 };
 
 #endif //_GAME_H

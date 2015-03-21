@@ -8,3 +8,8 @@
 /**
  * Game implementation
  */
+
+Game::Game()
+{
+
+}
