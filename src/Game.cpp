@@ -14,9 +14,12 @@ Game::Game()
 	this->SFMLView.Init(30*30, 30*30);
 }
 
-void Game::changeLevel()
+void Game::changeLevel(int i)
 {
-	p.loadLevel("../GamJam/res/sauvegarde.txt");
+	std::string filename("../GamJam/res/maps/level");
+	filename += (i<10)? "0" : "";
+	filename += std::to_string(i) + ".txt";
+	p.loadLevel(filename);
 }
 
 void Game::run()

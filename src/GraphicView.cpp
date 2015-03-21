@@ -21,7 +21,7 @@ void GraphicView::Init(int height, int width)
 
 	for (int i=1; i<=5; ++i)
 	{
-		std::string filename("../GamJam/res/bloc");
+		std::string filename("../GamJam/res/textures/blocs/bloc");
 		if (i<10)
 			filename += "0";
 		else
