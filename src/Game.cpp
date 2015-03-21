@@ -14,12 +14,12 @@ Game::Game()
 	this->SFMLView.Init(30*30, 30*30);
 }
 
-void Game::CreateWorld()
+void Game::changeLevel()
 {
-
+	p.loadLevel("../GamJam/res/sauvegarde.txt");
 }
 
-void Game::Run()
+void Game::run()
 {
 	int eventID = 0;
 	while(eventID != 1)
