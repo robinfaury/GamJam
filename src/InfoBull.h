@@ -6,9 +6,14 @@
 #ifndef _INFOBULL_H
 #define _INFOBULL_H
 
-class InfoBull { 
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <stdio.h>
+#include <iostream>
 
-	InfoBull(void);
+class InfoBull { 
+public:
+	InfoBull(std::string);
 
 	~InfoBull(void);
 
