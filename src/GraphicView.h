@@ -6,7 +6,33 @@
 #ifndef _GRAPHICVIEW_H
 #define _GRAPHICVIEW_H
 
-class GraphicView {
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+#include <iostream>
+#include <vector>
+#include <string>
+
+#include "World.h"
+
+class GraphicView 
+{
+private:
+	World* world;
+	sf::RenderWindow* window;
+
+	std::vector<sf::Texture> blocTextures;
+	std::vector<sf::Sprite> sprites;
+
+public:
+	GraphicView();
+
+	void Init(int height, int width);
+	int CheckEvent();
+	void Draw();
+
+	void SetWorld(World* world);
+
+	~GraphicView();
 };
 
 #endif //_GRAPHICVIEW_H
