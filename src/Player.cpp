@@ -16,13 +16,49 @@ Player::Player() : DynamicObject()
 	life = 1.0f;
 	experience = 0.0f;
 	level = 0;
+	mass = 50;
+	maxSpeed = 30;
+	maxAcceleration = 10;
 }
 
-Player::Player(glm::vec2 position, glm::vec2 size, Orientation orientation) : DynamicObject(position, size, orientation)
+Player::Player(int gender) : DynamicObject()
 {
 	life = 1.0f;
 	experience = 0.0f;
 	level = 0;
+	this->gender = gender;
+	if (gender == 0)
+	{
+		mass = 50;
+		maxSpeed = 30;
+		maxAcceleration = 10;
+	}
+	else
+	{
+		mass = 70;
+		maxSpeed = 20;
+		maxAcceleration = 5;
+	}
+}
+
+Player::Player(glm::vec2 position, glm::vec2 size, Orientation orientation, int gender) : DynamicObject(position, size, orientation)
+{
+	life = 1.0f;
+	experience = 0.0f;
+	level = 0;
+	this->gender = gender;
+	if (gender == 0)
+	{
+		mass = 50;
+		maxSpeed = 30;
+		maxAcceleration = 10;
+	}
+	else
+	{
+		mass = 70;
+		maxSpeed = 20;
+		maxAcceleration = 5;
+	}
 }
 
 //-------------------- Getters -----------------------
@@ -42,6 +78,11 @@ int Player::getLevel()
 	return level;
 }
 
+int Player::getGender()
+{
+	return gender;
+}
+
 //-------------------- Setters -----------------------
 
 void Player::setLife(double life)
@@ -57,6 +98,11 @@ void Player::setExperience(double experience)
 void Player::setLevel(int level)
 {
 	this->level = level;
+}
+
+void Player::setGender(int gender)
+{
+	this->gender = gender;
 }
 
 //------------------ State Changes -------------------
