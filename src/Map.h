@@ -22,10 +22,11 @@ public:
 	Map(int h,int w, int** g);
 
 	~Map(void);
-    
-    void load();
-    
-    void save();
+
+	int getheight();
+	int getwidth();
+	int** getgrid();
+	
 };
 
 #endif //_MAP_H

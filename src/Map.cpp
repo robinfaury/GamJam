@@ -17,17 +17,34 @@ Map::Map(int h, int w, int** g)
 {
 	height = h;
 	width = w;
-	grid = g;
+
+	grid = new int*[height];
+	for (int i = 0; i < height; i++)
+		grid[i] = new int[width];
+	for (int i = 0; i < height; i++)
+	{
+		for (int j = 0; j < width; j++)
+		{
+			grid[i][j] = g[i][j];
+		}
+	}
 
 }
 
 Map::~Map(void){
 
 }
-void Map::load() {
 
+
+int Map::getheight()
+{
+	return (height);
 }
-
-void Map::save() {
-
+int Map::getwidth()
+{
+	return(width);
+}
+int** Map::getgrid()
+{
+	return(grid);
 }
