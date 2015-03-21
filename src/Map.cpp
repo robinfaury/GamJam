@@ -20,6 +20,11 @@ void Map::loadLevel(int i)
 	filename += (i<10)? "0" : "";
 	filename += std::to_string(i) + ".txt";
 	this->parser.loadLevel(filename, &this->grid, &this->height, &this->width);
+	this->maxIDTexture = 0;
+	for (int x=0; x<this->width; ++x)
+		for (int y=0; y<this->height; ++y)
+			if (this->grid[x][y] > this->maxIDTexture)
+				this->maxIDTexture = this->grid[x][y];
 }
 
 Map::~Map(void)

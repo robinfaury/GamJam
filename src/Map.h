@@ -16,6 +16,7 @@ private:
 	int** grid;
     int height;
     int width;
+	int maxIDTexture;
 	Parser parser;
 
 public: 
@@ -29,6 +30,7 @@ public:
 	int getheight();
 	int getwidth();
 	int** getgrid();
+	int getMaxIDTexture() {return this->maxIDTexture;}
 	
 };
 

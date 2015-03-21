@@ -19,7 +19,8 @@ void GraphicView::Init(int height, int width)
 	this->window = new sf::RenderWindow(sf::VideoMode(height, width), "boobs");
 	this->window->setVerticalSyncEnabled(true);
 
-	for (int i=1; i<=5; ++i)
+	Map* map = this->world->getMap();
+	for (int i=1; i<=map->getMaxIDTexture(); ++i)
 	{
 		std::string filename("../GamJam/res/textures/blocs/bloc");
 		if (i<10)
@@ -34,7 +35,6 @@ void GraphicView::Init(int height, int width)
 		std::cout<<filename<<std::to_string(i)<<".png is loaded"<<std::endl;
 	}
 
-	Map* map = this->world->getMap();
 	for (int x=0; x<map->getwidth(); ++x)
 	{
 		for (int y=0; y<map->getheight(); ++y)

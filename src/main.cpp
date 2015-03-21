@@ -4,7 +4,7 @@
 int main(int argc, char* argv[])
 {
 
-	sf::Music music;
+	/*sf::Music music;
 	if (!music.openFromFile("../GamJam/res/music.ogg"))
 		std::cout << "fail";
 	
@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 	
 		music.setLoop(true);
 	
-
+	*/
 	
 	Game boobs;
 	boobs.init();
