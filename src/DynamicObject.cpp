@@ -109,7 +109,8 @@ void DynamicObject::setMass(double mass)
 
 void DynamicObject::move(glm::vec2 gravity, int time) 
 {
-	position += velocity * time + 0.5 * acceleration * time * time;
+	position.x += velocity.x * time + 0.5 * acceleration.x * time * time;
+	position.y += velocity.y * time + 0.5 * acceleration.y * time * time;
 	velocity += acceleration * time;
 	orientation += rotation * time;
 
@@ -117,7 +118,7 @@ void DynamicObject::move(glm::vec2 gravity, int time)
 	{
 		acceleration = maxAcceleration;
 	}
-	if (velocity > maxSpeed)
+	if (velocity.length() > maxSpeed)
 	{
 		velocity = maxSpeed;
 	}
