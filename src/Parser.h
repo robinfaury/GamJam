@@ -10,29 +10,27 @@
 #include<fstream>
 #include<string>
 #include <stdio.h>
-#include "Map.h"
 
-class Parser {
+class Parser 
+{
 private :
-	Map m;
+
 public: 
     
 	Parser(void);
 
 	~Parser(void);
-
-	void setMap(Map);
 	
 
     /**
      * @param string
      */
-    void loadLevel( std::string);
+    void loadLevel( std::string, int*** arr, int* height, int* width);
     
     /**
      * @param string
      */
-    void saveLevel( std::string);
+    void saveLevel( std::string, int** arr, int height, int width);
 };
 
 #endif //_PARSER_H

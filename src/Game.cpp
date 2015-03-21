@@ -11,15 +11,19 @@
 
 Game::Game()
 {
+	this->SFMLView = GraphicView(&this->world);
+}
+
+void Game::init()
+{
+	this->changeLevel(1);
 	this->SFMLView.Init(30*30, 30*30);
+	this->event = Event(this->SFMLView.getWindow());
 }
 
 void Game::changeLevel(int i)
 {
-	std::string filename("../GamJam/res/maps/level");
-	filename += (i<10)? "0" : "";
-	filename += std::to_string(i) + ".txt";
-	p.loadLevel(filename);
+	this->world.ChargeLevel(i);
 }
 
 void Game::run()
@@ -29,7 +33,7 @@ void Game::run()
 	{
 		auto start_time = std::chrono::high_resolution_clock::now();
 
-		eventID = this->SFMLView.CheckEvent();
+		eventID = this->event.CheckEvent();
 
 		this->SFMLView.Draw();
 

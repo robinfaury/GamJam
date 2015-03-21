@@ -3,7 +3,7 @@
 int main(int argc, char* argv[])
 {
 	Game boobs;
-	boobs.changeLevel(1);
+	boobs.init();
 	boobs.run();
 
 
