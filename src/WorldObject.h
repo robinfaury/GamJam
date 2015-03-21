@@ -10,9 +10,12 @@
 
 class WorldObject 
 {
-public: 
+private: 
     glm::vec2 position;
     glm::vec2 size;
+
+public:
+	glm::vec2 getPosition();
 };
 
 #endif //_WORLDOBJECT_H
