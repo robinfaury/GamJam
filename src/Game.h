@@ -1,16 +1,26 @@
 /**
  * Project Untitled
  */
-
-
 #ifndef _GAME_H
 #define _GAME_H
 
-class Game {
-public: 
+#include <chrono>
+
+#include "GraphicView.h"
+
+class Game 
+{
+private: 
+	GraphicView SFMLView;
     bool editor;
-private:
+
+public:
 	Game();
+
+	void CreateWorld();
+	void Run();
+
+	~Game();
 };
 
 #endif //_GAME_H
