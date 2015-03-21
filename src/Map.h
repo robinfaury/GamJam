@@ -6,11 +6,15 @@
 #ifndef _MAP_H
 #define _MAP_H
 
-class Map {
+class Map 
+{
+private:
+	int** grid;
+    int height;
+    int width;
+
 public: 
-    int** grid;
-    void height;
-    void width;
+    
     
     void load();
     

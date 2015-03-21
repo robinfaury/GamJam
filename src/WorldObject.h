@@ -6,11 +6,13 @@
 #ifndef _WORLDOBJECT_H
 #define _WORLDOBJECT_H
 
-class WorldObject {
+#include <glm.hpp>
+
+class WorldObject 
+{
 public: 
-    vector2 position;
-    vector size;
-    void pysiqueAttribute;
+    glm::vec2 position;
+    glm::vec2 size;
 };
 
 #endif //_WORLDOBJECT_H

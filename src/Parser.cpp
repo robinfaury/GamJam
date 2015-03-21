@@ -14,7 +14,7 @@
  * @param string
  * @return void
  */
-void Parser::loadLevel( string) {
+void Parser::loadLevel( std::string) {
     return;
 }
 
@@ -22,6 +22,6 @@ void Parser::loadLevel( string) {
  * @param string
  * @return void
  */
-void Parser::saveLevel( string) {
+void Parser::saveLevel( std::string) {
     return;
 }

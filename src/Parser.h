@@ -6,18 +6,20 @@
 #ifndef _PARSER_H
 #define _PARSER_H
 
+#include <iostream>
+
 class Parser {
 public: 
     
     /**
      * @param string
      */
-    void loadLevel( string);
+    void loadLevel( std::string);
     
     /**
      * @param string
      */
-    void saveLevel( string);
+    void saveLevel( std::string);
 };
 
 #endif //_PARSER_H

@@ -8,8 +8,6 @@
 
 class World {
 public: 
-    void listeWorldObject;
-    void plistDyn;
     
     void MoveBlock();
 };

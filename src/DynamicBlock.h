@@ -10,9 +10,9 @@
 #include "DynamicObject.h"
 
 
-class DynamicBlock: public DynamicObject, public DynamicObject {
+class DynamicBlock: public DynamicObject 
+{
 public: 
-    void type;
 };
 
 #endif //_DYNAMICBLOCK_H
