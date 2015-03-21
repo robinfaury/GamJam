@@ -1,6 +1,6 @@
 #include "Game.h"
 #include <SFML/Audio.hpp>
-
+#include "InfoBull.h"
 int main(int argc, char* argv[])
 {
 
@@ -11,12 +11,10 @@ int main(int argc, char* argv[])
 		music.play();
 	
 		music.setLoop(true);
+		
+		InfoBull("boobs");
 	
-
-	
-	Game boobs;
-	boobs.changeLevel(1);
-	boobs.run();
+		std::cin.get();
 
 	return 0;
 } 
