@@ -17,6 +17,7 @@ World::World()
 void World::ChargeLevel(int i)
 {
 	this->map.loadLevel(i);
+	//std::cin.get();
 	for (int x=0; x<map.getwidth(); ++x)
 	{
 		for (int y=0; y<map.getheight(); ++y)
