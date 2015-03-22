@@ -10,7 +10,8 @@
  */
 
 GraphicView::GraphicView(World* world)
-{
+{	
+	this->sortir = 0;
 	this->world = world;
 	this->currentIDTexture = 0;
 	this->editor = false;
@@ -20,7 +21,7 @@ GraphicView::GraphicView(World* world)
 
 void GraphicView::Init(int height, int width)
 {
-	this->window = new sf::RenderWindow(sf::VideoMode(1980, 1080), "boobs", sf::Style::Fullscreen);
+	this->window = new sf::RenderWindow(sf::VideoMode(1630, 1080), "boobs");
 	this->window->setVerticalSyncEnabled(true);
 	this->event = Event(this->window);
 
@@ -53,18 +54,23 @@ void GraphicView::Init(int height, int width)
 	this->haut.setTexture(hautTexture);
 	this->haut.setPosition(0, 0);
 
+	this->buttons.push_back(Button(1400, 700, 50, 65, 1));
+	this->buttons.push_back(Button(500,53, 370, 65, 1));
+	this->buttons.push_back(Button(1000, 53, 370, 65, 1));
 	this->buttons.push_back(Button(1400, 800,204,65,1));
-	this->buttons.push_back(Button(1400, 700, 204, 65,2));
-	this->buttons[this->buttons.size()-2].setImage("../GamJam/res/textures/body/btv.png");
-	this->buttons[this->buttons.size()-1].setImage("../GamJam/res/textures/body/bto.png");
+	this->buttons.push_back(Button(50, 53, 370, 65, 2));
+	this->buttons[this->buttons.size() - 5].setImage("../GamJam/res/textures/body/refresh.png");
+	this->buttons[this->buttons.size() - 4].setImage("../GamJam/res/textures/body/btm2.png");
+	this->buttons[this->buttons.size() - 3].setImage("../GamJam/res/textures/body/btm.png"); //jouer
+	this->buttons[this->buttons.size()-2].setImage("../GamJam/res/textures/body/btv.png"); //quitter
+	this->buttons[this->buttons.size()-1].setImage("../GamJam/res/textures/body/btm3.png"); //editer
+	
 }
 
 int GraphicView::computeEvent()
 {
 	int eventID = this->event.CheckEvent();
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-		this->editor = true;
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		this->world->getPlayer()->stop();
@@ -94,6 +100,53 @@ int GraphicView::computeEvent()
 
 	float x = sf::Mouse::getPosition(*this->window).x, y = sf::Mouse::getPosition(*this->window).y;
 
+	if (this->buttons[this->buttons.size() - 5].verif(x, y))
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			this->buttons[this->buttons.size() - 5].setImage("../GamJam/res/textures/body/refresh_c.png");
+			this->world->getPlayer()->setGender(!this->world->getPlayer()->getGender());
+
+		}
+		else{
+			this->buttons[this->buttons.size() - 5].setImage("../GamJam/res/textures/body/refresh.png");
+		}
+		
+	}
+
+	if (this->buttons[this->buttons.size() - 4].verif(x, y))
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			this->buttons[this->buttons.size() - 4].setImage("../GamJam/res/textures/body/btm2_c.png");
+			this->world->SaveLevel();
+			this->editor = false;
+
+		}else{
+
+			this->buttons[this->buttons.size() - 4].setImage("../GamJam/res/textures/body/btm2.png");
+			
+		}
+	}
+
+	if (this->buttons[this->buttons.size() - 3].verif(x, y))
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			this->buttons[this->buttons.size() - 3].setImage("../GamJam/res/textures/body/btm_c.png");
+			this->editor = false;
+
+			
+			closer2();
+
+			this->sortir = 1;
+			
+
+			
+
+		}
+	}
+
 	if (this->buttons[this->buttons.size() - 2].verif(x,y))
 	{	
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
@@ -107,20 +160,22 @@ int GraphicView::computeEvent()
 	{
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 		{
-			this->buttons[this->buttons.size() - 1].setImage("../GamJam/res/textures/body/bto_c.png");
+			this->buttons[this->buttons.size() - 1].setImage("../GamJam/res/textures/body/btm3_c.png");
+
 
 		}
 		else{
 			
-			this->buttons[this->buttons.size() - 1].setImage("../GamJam/res/textures/body/bto.png");
+			this->buttons[this->buttons.size() - 1].setImage("../GamJam/res/textures/body/btm3.png");
+			this->editor = true;
 		}
 	}
 
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		this->world->SaveLevel();
-	}
+		
+	}*/
 
 	return eventID;
 }
@@ -158,7 +213,14 @@ void GraphicView::closer(){
 window->close();
 exit(0);
 }
+void GraphicView::closer2(){
+	window->close();
+	
+}
 GraphicView::~GraphicView()
 {
 
+}
+int GraphicView::getsortir(){
+	return sortir;
 }

@@ -14,6 +14,7 @@
 #include <chrono>
 
 #include "World.h"
+
 #include "Event.h"
 #include "Player.h"
 #include "Button.h"
@@ -22,6 +23,7 @@ class GraphicView
 {
 private:
 	World* world;
+	int sortir;
 	sf::RenderWindow* window;
 	Event event;
 	bool editor;
@@ -45,11 +47,12 @@ private:
 public:
 	GraphicView(){}
 	GraphicView(World* world);
-
+	int getsortir();
 	void Init(int height, int width);
 	int computeEvent();
 	void Draw();
 	void GraphicView::closer();
+	void GraphicView::closer2();
 	sf::RenderWindow* getWindow() {return this->window;}
 
 	void setModeEdition(bool state) {this->editor = state;}

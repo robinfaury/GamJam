@@ -20,7 +20,7 @@ private:
 public:
 	Game();
 
-	void init();
+	void init(int);
 	void changeLevel(int i);
 	void run();
 	void Physique();

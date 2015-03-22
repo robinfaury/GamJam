@@ -11,12 +11,12 @@
 
 Game::Game()
 {
-	this->SFMLView = GraphicView(&this->world);
+	this->SFMLView = GraphicView(&this->world/*,this*/);
 }
 
-void Game::init()
+void Game::init(int i)
 {
-	this->changeLevel(1);
+	this->changeLevel(i);
 	this->SFMLView.Init(0, 0);
 	this->world.getPlayer()->init();
 	for (int i=0; i<this->world.getWorldObjects()->size(); ++i)
@@ -31,7 +31,7 @@ void Game::changeLevel(int i)
 void Game::run()
 {
 	int eventID = 0;
-	while(eventID != -1)
+	while (eventID != -1 && SFMLView.getsortir()==0)
 	{
 		auto start_time = std::chrono::high_resolution_clock::now();
 
