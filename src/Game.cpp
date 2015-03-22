@@ -52,20 +52,71 @@ void Game::Physique()
 		Player* player = this->world.getPlayer();
 
 		int i = player->getPosition().x/30, j = player->getPosition().y/30;
-		std::cout<<i<<j<<this->world.getMap()->getgrid()[j][i]<<"|";
-		if (this->world.getMap()->getgrid()[j][i] == 0)
+		int bloc = this->world.getMap()->getgrid()[j][i];
+		std::cout<<i<<j<<bloc<<"|";
+		if (bloc == 0) // vide
 		{
-			player->setPosition(player->getPosition()+glm::vec2(0, 1));
+			player->setPosition(player->getPosition() + glm::vec2(0, 1)); // tombe
 		}
-		if (this->world.getMap()->getgrid()[j][i] == 13)
-		{
-			player->setPosition(player->getPosition()+glm::vec2(0, 1));
+		if (bloc == 13 || bloc == 7 || bloc == 8 || bloc == 10 || bloc == 11 || bloc == 14 || bloc == 15 || bloc == 16 || bloc == 19) // feu, lave, eau ou pics
+		{ 
+			player->setPosition(player->getPosition()+glm::vec2(0, 1)); // tombe et meurt
 			std::cout<<"DEAD";
 		}
-		if (this->world.getMap()->getgrid()[j][i] == 1 || this->world.getMap()->getgrid()[j][i] == 5)
+		if (bloc == 1 || bloc == 5 || bloc == 4) // terre, herbe ou départ
 		{
-			player->setPosition(player->getPosition()+glm::vec2(2, 0));
+			// avance normalement
+			glm::vec2 nextPosition;
+			if (player->getDirection() == 1) // right
+			{
+				nextPosition = player->getPosition() + glm::vec2(2, 0);
+			}
+			else // left
+			{
+				nextPosition = player->getPosition() - glm::vec2(2, 0);
+			}
+			detectCollision(nextPosition);
 		}
+
+		if (bloc == 12 || bloc == 17) // neige ou sable
+		{
+			// avance lentement
+			glm::vec2 nextPosition;
+			if (player->getDirection() == 1) // right
+			{
+				nextPosition = player->getPosition() + glm::vec2(1, 0);
+			}
+			else // left
+			{
+				nextPosition = player->getPosition() - glm::vec2(1, 0);
+			}
+			detectCollision(nextPosition);
+		}
+	}
+}
+
+void Game::detectCollision(glm::vec2 nextPosition)
+{
+	Player* player = this->world.getPlayer();
+
+	int nexti = nextPosition.x / 30;
+	int nextj = nextPosition.y / 30;
+	nexti--;
+	int nextbloc = this->world.getMap()->getgrid()[nextj][nexti];
+
+	if (nextbloc == 0 || nextbloc == 2 || nextbloc == 18) // vide ou fond de caverne
+	{
+		player->setPosition(nextPosition); // avance
+	}
+	else if (nextbloc == 7 || nextbloc == 8 || nextbloc == 13 || nextbloc == 14 || nextbloc == 15 || nextbloc == 16 || nextbloc == 10 || nextbloc == 11 || nextbloc == 19) // eau, feu, lave ou pics 
+	{
+		player->setPosition(nextPosition); // avance et meurt
+		std::cout << "DEAD";
+	}
+	else
+	{
+		// fait demi-tour
+		player->changeDirection();
 	}
 }
 

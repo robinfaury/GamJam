@@ -19,6 +19,7 @@ private:
 	bool dead;
 	int level;
 	int gender; // 0 for Male, 1 for Female
+	int direction; // 0 for Left, 1 for Right
 	std::vector<sf::Texture> playerTextureAnim;
 	sf::Texture playerTexture;
 	sf::Sprite player;
@@ -42,6 +43,7 @@ public:
 	double getExperience();
 	int getLevel();
 	int getGender();
+	int getDirection();
 	sf::Sprite* getPlayerSprite() {return &this->player;}
 
 	//-------------------- Setters -----------------------
@@ -50,12 +52,14 @@ public:
 	void setExperience(double experience);
 	void setLevel(int level);
 	void setGender(int gender);
+	void setDirection(int direction);
 
 	//------------------ State Changes -------------------
 
 	void earnExperience(double experience);
 	void regainLife(double lifeHeal);
 	void loseLife(double lifeDamage);
+	void changeDirection();
 };
 
 #endif //_PLAYER_H

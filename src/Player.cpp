@@ -65,6 +65,8 @@ Player::Player(glm::vec2 position, glm::vec2 size, Orientation orientation, int 
 
 void Player::init()
 {
+	this->direction = 1;
+
 	for (int i=1; i<7; ++i)
 	{
 		std::string filename("../GamJam/res/textures/players/boy/player");
@@ -75,8 +77,6 @@ void Player::init()
 	}
 	if (!this->playerTexture.loadFromFile("../GamJam/res/textures/players/boy/player1.png"))
 		std::cout<<"ERROR : "<<"../GamJam/res/textures/players/boy/player1.png isn't loaded"<<std::endl;
-
-	this->direction = glm::vec2(0, 0);
 
 	stop();
 }
@@ -93,7 +93,7 @@ void Player::run(int time)
 
 void Player::stop()
 {
-	this->direction = glm::vec2(0, 0);
+	this->direction = 1;
 	this->player.setTexture(this->playerTexture);
 	this->player.setPosition(this->position.x, this->position.y);
 }
@@ -120,6 +120,11 @@ int Player::getGender()
 	return gender;
 }
 
+int Player::getDirection()
+{
+	return direction;
+}
+
 //-------------------- Setters -----------------------
 
 void Player::setLife(double life)
@@ -140,6 +145,11 @@ void Player::setLevel(int level)
 void Player::setGender(int gender)
 {
 	this->gender = gender;
+}
+
+void Player::setDirection(int direction)
+{
+	this->direction = direction;
 }
 
 //------------------ State Changes -------------------
@@ -169,5 +179,17 @@ void Player::loseLife(double lifeDamage)
 	if (life < 0)
 	{
 		life = 0;
+	}
+}
+
+void Player::changeDirection()
+{
+	if (direction == 0)
+	{
+		direction = 1;
+	}
+	else
+	{
+		direction = 0;
 	}
 }

@@ -23,6 +23,7 @@ public:
 	void changeLevel(int i);
 	void run();
 	void Physique();
+	void detectCollision(glm::vec2 nextPosition);
 
 	~Game();
 };
