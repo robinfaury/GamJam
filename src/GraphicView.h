@@ -49,7 +49,7 @@ public:
 	void Init(int height, int width);
 	int computeEvent();
 	void Draw();
-
+	void GraphicView::closer();
 	sf::RenderWindow* getWindow() {return this->window;}
 
 	void setModeEdition(bool state) {this->editor = state;}

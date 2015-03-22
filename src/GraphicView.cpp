@@ -53,7 +53,9 @@ void GraphicView::Init(int height, int width)
 	this->haut.setTexture(hautTexture);
 	this->haut.setPosition(0, 0);
 
-	this->buttons.push_back(Button(10, 10));
+	this->buttons.push_back(Button(1400, 800,204,65,1));
+	this->buttons.push_back(Button(1400, 700, 204, 65,2));
+	this->buttons[this->buttons.size()-2].setImage("../GamJam/res/textures/body/btv.png");
 	this->buttons[this->buttons.size()-1].setImage("../GamJam/res/textures/body/bto.png");
 }
 
@@ -96,6 +98,32 @@ int GraphicView::computeEvent()
 			}
 		}
 	}
+
+	float x = sf::Mouse::getPosition(*this->window).x, y = sf::Mouse::getPosition(*this->window).y;
+
+	if (this->buttons[this->buttons.size() - 2].verif(x,y))
+	{	
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			this->buttons[this->buttons.size() - 2].setImage("../GamJam/res/textures/body/btv_c.png");
+			closer();
+			
+		}
+	}
+	if (this->buttons[this->buttons.size() - 1].verif(x, y))
+	{
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			this->buttons[this->buttons.size() - 1].setImage("../GamJam/res/textures/body/bto_c.png");
+
+		}
+		else{
+			
+			this->buttons[this->buttons.size() - 1].setImage("../GamJam/res/textures/body/bto.png");
+		}
+	}
+
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		this->world->SaveLevel();
@@ -122,6 +150,7 @@ void GraphicView::Draw()
 
 	window->draw(this->lateral);
 	window->draw(this->haut);
+
 	for (std::vector<Button>::iterator it = this->buttons.begin(); it != this->buttons.end(); ++it)
 		window->draw(*(*it).getSprite());
 
@@ -131,12 +160,16 @@ void GraphicView::Draw()
 	{
 		this->play = false;
 	}
+
 	if (this->play)
 		this->world->getPlayer()->run(this->time);
 
 	++this->time;
 }
-
+void GraphicView::closer(){
+window->close();
+exit(0);
+}
 GraphicView::~GraphicView()
 {
 
