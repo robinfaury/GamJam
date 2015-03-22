@@ -9,10 +9,15 @@
  * Button implementation
  */ 
 
-Button::Button(int a, int b)
+Button::Button(int a, int b, int l, int h,int idd)
 {
 	x = a;
 	y = b;
+	largeur = l;
+	hauteur = h;
+	id = idd;
+
+	sprite.setPosition(x, y);
 }
 
 void Button::setImage(std::string path)

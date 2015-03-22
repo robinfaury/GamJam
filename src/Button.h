@@ -22,7 +22,7 @@ private:
 public:
 	
 	Button();
-	Button(int x, int y);
+	Button(int x, int y, int l, int h,int idd);
 	~Button();
 	int verif(int, int);
 	void setImage(std::string path);
