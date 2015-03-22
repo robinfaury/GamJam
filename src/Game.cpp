@@ -55,7 +55,7 @@ void Game::Physique()
 		std::cout<<i<<j<<this->world.getMap()->getgrid()[j][i]<<"|";
 		if (this->world.getMap()->getgrid()[j][i] == 0)
 		{
-			player->setPosition(player->getPosition()+glm::vec2(0.5, 1));
+			player->setPosition(player->getPosition()+glm::vec2(0, 1));
 		}
 		if (this->world.getMap()->getgrid()[j][i] == 13)
 		{
