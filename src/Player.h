@@ -6,6 +6,9 @@
 #define _PLAYER_H
 
 #include "DynamicObject.h"
+#include <vector>
+#include <SFML/Graphics.hpp>
+#include <iostream>
 
 
 class Player: public DynamicObject 
@@ -13,8 +16,13 @@ class Player: public DynamicObject
 private:
 	double life;
 	double experience;
+	bool dead;
 	int level;
 	int gender; // 0 for Male, 1 for Female
+	std::vector<sf::Texture> playerTextureAnim;
+	sf::Texture playerTexture;
+	sf::Sprite player;
+	int currentIDPlayer;
 
 public:
 
@@ -24,12 +32,17 @@ public:
 	Player(int gender);
 	Player(glm::vec2 position, glm::vec2 size, Orientation orientation, int gender);
 
+	void init();
+	void run(int time);
+	void stop();
+
 	//-------------------- Getters -----------------------
 
 	double getLife();
 	double getExperience();
 	int getLevel();
 	int getGender();
+	sf::Sprite* getPlayerSprite() {return &this->player;}
 
 	//-------------------- Setters -----------------------
 

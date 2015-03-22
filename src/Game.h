@@ -15,7 +15,6 @@ private:
 	GraphicView SFMLView;
 
 	World world;
-    bool editor;
 
 public:
 	Game();
@@ -23,6 +22,7 @@ public:
 	void init();
 	void changeLevel(int i);
 	void run();
+	void Physique();
 
 	~Game();
 };

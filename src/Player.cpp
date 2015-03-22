@@ -19,6 +19,8 @@ Player::Player() : DynamicObject()
 	mass = 50;
 	maxSpeed = 30;
 	maxAcceleration = 10;
+	this->player.setOrigin(0, 60);
+	this->currentIDPlayer = 0;
 }
 
 Player::Player(int gender) : DynamicObject()
@@ -59,6 +61,41 @@ Player::Player(glm::vec2 position, glm::vec2 size, Orientation orientation, int 
 		maxSpeed = 20;
 		maxAcceleration = 5;
 	}
+}
+
+void Player::init()
+{
+	for (int i=1; i<7; ++i)
+	{
+		std::string filename("../GamJam/res/textures/players/boy/player");
+		filename += std::to_string(i+1) + ".png";
+		this->playerTextureAnim.push_back(sf::Texture());
+		if (!this->playerTextureAnim[this->playerTextureAnim.size()-1].loadFromFile(filename))
+			std::cout<<"ERROR : "<<filename<<std::to_string(i)<<".png isn't loaded"<<std::endl;
+	}
+	if (!this->playerTexture.loadFromFile("../GamJam/res/textures/players/boy/player1.png"))
+		std::cout<<"ERROR : "<<"../GamJam/res/textures/players/boy/player1.png isn't loaded"<<std::endl;
+
+	this->direction = glm::vec2(0, 0);
+
+	stop();
+}
+
+void Player::run(int time)
+{
+	if (time%7==0)
+	{
+		this->currentIDPlayer = ++this->currentIDPlayer%this->playerTextureAnim.size();
+		this->player.setTexture(this->playerTextureAnim[this->currentIDPlayer]);
+	}
+	this->player.setPosition(this->position.x, this->position.y);
+}
+
+void Player::stop()
+{
+	this->direction = glm::vec2(0, 0);
+	this->player.setTexture(this->playerTexture);
+	this->player.setPosition(this->position.x, this->position.y);
 }
 
 //-------------------- Getters -----------------------

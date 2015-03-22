@@ -81,6 +81,7 @@ void Parser::saveLevel( std::string path, int** grid, int height, int width)
 			}
 			fichier << std::endl;
 		}
+		fichier.close();
 	}
 	
 }

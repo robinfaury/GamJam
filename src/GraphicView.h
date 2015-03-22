@@ -11,9 +11,11 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <chrono>
 
 #include "World.h"
 #include "Event.h"
+#include "Player.h"
 
 class GraphicView 
 {
@@ -22,7 +24,13 @@ private:
 	sf::RenderWindow* window;
 	Event event;
 	bool editor;
+	bool play;
+	sf::Texture textureBackground;
+	sf::Sprite background;
 	sf::Sprite currentSprite;
+	int currentIDTexture;
+	
+	int time;
 
 	std::vector<sf::Texture> blocTextures;
 	std::vector<sf::Sprite> sprites;
@@ -38,6 +46,7 @@ public:
 	sf::RenderWindow* getWindow() {return this->window;}
 
 	void setModeEdition(bool state) {this->editor = state;}
+	bool isPlay() {return this->play;}
 
 	~GraphicView();
 };

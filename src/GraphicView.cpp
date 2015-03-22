@@ -12,6 +12,10 @@
 GraphicView::GraphicView(World* world)
 {
 	this->world = world;
+	this->currentIDTexture = 0;
+	this->editor = false;
+	this->play = false;
+	this->time = 0;
 }
 
 void GraphicView::Init(int height, int width)
@@ -20,8 +24,8 @@ void GraphicView::Init(int height, int width)
 	this->window->setVerticalSyncEnabled(true);
 	this->event = Event(this->window);
 
-	Map* map = this->world->getMap();
-	for (int i=1; i<=map->getMaxIDTexture(); ++i)
+	
+	for (int i=0; i<this->world->getMap()->getMaxIDTexture(); ++i)
 	{
 		std::string filename("../GamJam/res/textures/blocs/bloc");
 		if (i<10)
@@ -29,49 +33,52 @@ void GraphicView::Init(int height, int width)
 		else
 			filename += "";
 		filename += std::to_string(i) + ".png";
-
 		this->blocTextures.push_back(sf::Texture());
 		if (!this->blocTextures[this->blocTextures.size()-1].loadFromFile(filename))
 			std::cout<<"ERROR : "<<filename<<std::to_string(i)<<".png isn't loaded"<<std::endl;
-		std::cout<<filename<<std::to_string(i)<<".png is loaded"<<std::endl;
 	}
 
-	for (int x=0; x<map->getwidth(); ++x)
-	{
-		for (int y=0; y<map->getheight(); ++y)
-			std::cout<<map->getgrid()[x][y];
-		std::cout<<std::endl;
-	}
-	for (int x=0; x<map->getwidth(); ++x)
-	{
-		for (int y=0; y<map->getheight(); ++y)
-		{
-			this->sprites.push_back(sf::Sprite());
-			if (map->getgrid()[x][y] != 0)
-				this->sprites[this->sprites.size()-1].setTexture(this->blocTextures[map->getgrid()[x][y]-1]);
-			this->sprites[this->sprites.size()-1].setPosition(y*30, x*30);
-		}
-	}
-	this->sprites.push_back(sf::Sprite());
-	this->sprites[this->sprites.size()-1].setTexture(this->blocTextures[4]);
-	this->sprites[this->sprites.size()-1].setPosition(50, 50);
+	if (!textureBackground.loadFromFile("../GamJam/res/textures/body/fond.png"))
+		std::cout<<"ERROR : "<<"../GamJam/res/textures/body/fond.png isn't loaded"<<std::endl;
+	this->background.setTexture(textureBackground);
+	this->background.setPosition(0, 0);
 }
 
 int GraphicView::computeEvent()
 {
 	int eventID = this->event.CheckEvent();
-	std::cout<<eventID;
-	if (eventID == 2)
-	{
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 		this->editor = true;
-	}
-	if (eventID == 3)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
-		this->currentSprite.setTexture(this->blocTextures[0]);
+		this->world->getPlayer()->stop();
+		this->play = true;
+	}
+
+	if (0 <= eventID && eventID <= this->blocTextures.size()-1)
+	{
+		this->currentSprite.setTexture(this->blocTextures[eventID]);
+		this->currentIDTexture = eventID;
 	}
 	if (this->editor)
 	{
-		this->currentSprite.setPosition(sf::Mouse::getPosition(*this->window).x-15, sf::Mouse::getPosition(*this->window).y-15);
+		float x = sf::Mouse::getPosition(*this->window).x, y = sf::Mouse::getPosition(*this->window).y;
+		if (!(x < 0 || y < 0 || x >this->window->getSize().x || y > this->window->getSize().y))
+		{
+			this->currentSprite.setPosition(x-15, y-15);
+			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+			{
+				int i = x/30, j = y/30;
+				this->world->getMap()->getgrid()[j][i] = this->currentIDTexture;
+				this->world->getWorldObjects()->at(this->world->getMap()->getheight()*j+i).setType(this->currentIDTexture);
+				this->world->getWorldObjects()->at(this->world->getMap()->getheight()*j+i).init(this->world->getNbFrame(this->currentIDTexture));
+			}
+		}
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	{
+		this->world->SaveLevel();
 	}
 
 	return eventID;
@@ -82,17 +89,22 @@ void GraphicView::Draw()
 {
 	window->clear(sf::Color::Black);
 
-	for (std::vector<sf::Sprite>::iterator it = this->sprites.begin(); it	!= this->sprites.end(); ++it)
+	window->draw(this->background);
+	for (int i=0; i<this->world->getWorldObjects()->size(); ++i)
 	{
-		window->draw(*it);
+		this->world->getWorldObjects()->at(i).draw(time);
+		window->draw(*this->world->getWorldObjects()->at(i).getSprite());
 	}
 	if (this->editor)
-	{
-		if (this->editor)
-			window->draw(this->currentSprite);
-	}
+		window->draw(this->currentSprite);
+	window->draw(*this->world->getPlayer()->getPlayerSprite());
 
 	window->display();
+
+	if (this->play)
+		this->world->getPlayer()->run(this->time);
+
+	++this->time;
 }
 
 GraphicView::~GraphicView()

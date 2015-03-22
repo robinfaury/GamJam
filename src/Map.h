@@ -24,6 +24,7 @@ public:
 	Map(void);
 
 	void loadLevel(int i);
+	void saveLevel();
 
 	~Map(void);
 

@@ -57,7 +57,7 @@ public:
 
 	//------------------- Movement -----------------------
 
-    void move(glm::vec2 gravity, int time);
+    void move();
 };
 
 #endif //_DYNAMICOBJECT_H

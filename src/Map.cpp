@@ -27,6 +27,12 @@ void Map::loadLevel(int i)
 				this->maxIDTexture = this->grid[x][y];
 }
 
+void Map::saveLevel()
+{
+	std::string filename("../GamJam/res/maps/level01.txt");
+	this->parser.saveLevel(filename, this->grid, this->height, this->width);
+}
+
 Map::~Map(void)
 {
 	
