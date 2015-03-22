@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 		std::cout << "fail";
 	
 		music.play();
-	
+		
 		music.setLoop(true);
 
 		std::cin.get();
