@@ -4,6 +4,7 @@
 
 
 #include "GraphicView.h"
+#include "InfoBull.h"
 
 /**
  * GraphicView implementation
@@ -159,7 +160,10 @@ void GraphicView::Draw()
 	if (this->world->getPlayer()->getDead() == true)
 	{
 		this->play = false;
+		InfoBull bulle("Game over!");
 	}
+
+	if (this->world->getPlayer())
 
 	if (this->play)
 		this->world->getPlayer()->run(this->time);

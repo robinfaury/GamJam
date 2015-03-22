@@ -53,7 +53,7 @@ void Game::Physique()
 		// tourner le sprite qd changement de direction
 		// sortie de la map haud et bas
 		// mort = fin du jeu
-		//détecter arrivée drapeau
+		//détecter arrivée
 
 		Player* player = this->world.getPlayer();
 
@@ -62,14 +62,19 @@ void Game::Physique()
 		//std::cout << "x:" << player->getPosition().x << "y:" << player->getPosition().y << "|";
 		//std::cout<<"i:"<<i<<"j:"<<j<<"bloc:"<<bloc<<"|";
 		bool fall = false;
-		if (bloc == 0 || bloc == 2 || bloc == 18) // vide
+
+		if (bloc == 6)
+		{
+			player->setWin(true);
+		}
+		else if (bloc == 0 || bloc == 2 || bloc == 18) // vide
 		{
 			player->setPosition(player->getPosition() + glm::vec2(0, 5)); // tombe
 			player->incFallsCounter();
 			//std::cout << "falls counter:" << player->getFallsCounter() << std::endl;
 			fall = true;
 		}
-		if (bloc == 13 || bloc == 7 || bloc == 8 || bloc == 10 || bloc == 11 || bloc == 14 || bloc == 15 || bloc == 16 || bloc == 19) // feu, lave, eau ou pics
+		else if (bloc == 13 || bloc == 7 || bloc == 8 || bloc == 10 || bloc == 11 || bloc == 14 || bloc == 15 || bloc == 16 || bloc == 19) // feu, lave, eau ou pics
 		{ 
 			player->setPosition(player->getPosition()+glm::vec2(0, 5)); // tombe et meurt
 			player->setDead(true);
@@ -77,7 +82,7 @@ void Game::Physique()
 			fall = true;
 		}
 
-		if (!fall)
+		if (!fall && player->getWin() != true)
 		{
 			if (player->getFallsCounter() > (3 * 30) / 5)
 			{
@@ -87,7 +92,7 @@ void Game::Physique()
 			else
 			{
 				player->setFallsCounter(0);
-				if (bloc == 1 || bloc == 3 || bloc == 5 || bloc == 4 || bloc == 6 || bloc == 9) // terre, herbe, bois, départ ou arrivée
+				if (bloc == 1 || bloc == 3 || bloc == 5 || bloc == 4 || bloc == 9) // terre, herbe, bois ou départ
 				{
 					// avance normalement
 					glm::vec2 nextPosition;

@@ -17,6 +17,7 @@ private:
 	double life;
 	double experience;
 	bool dead;
+	bool win;
 	int level;
 	int gender; // 0 for Male, 1 for Female
 	int direction; // 0 for Left, 1 for Right
@@ -47,6 +48,7 @@ public:
 	int getGender();
 	int getDirection();
 	bool getDead();
+	bool getWin();
 	int getFallsCounter();
 	sf::Sprite* getPlayerSprite() {return &this->player;}
 
@@ -59,6 +61,7 @@ public:
 	void setDirection(int direction);
 	void setDead(bool dead);
 	void setFallsCounter(int fallsCounter);
+	void setWin(bool win);
 
 	//------------------ State Changes -------------------
 

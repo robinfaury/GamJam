@@ -193,6 +193,11 @@ int Player::getFallsCounter()
 	return fallsCounter;
 }
 
+bool Player::getWin()
+{
+	return win;
+}
+
 //-------------------- Setters -----------------------
 
 void Player::setLife(double life)
@@ -228,6 +233,11 @@ void Player::setDead(bool dead)
 void Player::setFallsCounter(int fallsCounter)
 {
 	this->fallsCounter = fallsCounter;
+}
+
+void Player::setWin(bool win)
+{
+	this->win = win;
 }
 
 //------------------ State Changes -------------------
