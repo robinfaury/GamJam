@@ -29,9 +29,9 @@ void World::ChargeLevel(int i)
 		{
 			this->worldObject.push_back(DynamicBlock());
 			this->worldObject[this->worldObject.size()-1].setType(map.getgrid()[x][y]);
-			this->worldObject[this->worldObject.size()-1].setPosition(glm::vec2(y*30, x*30));
+			this->worldObject[this->worldObject.size()-1].setPosition(glm::vec2(y*30, 120+x*30));
 			if (map.getgrid()[x][y] == 5)
-				player.setPosition(glm::vec2(y*30, x*30));
+				player.setPosition(glm::vec2(y*30, 120+x*30));
 		}
 	}
 }

@@ -20,7 +20,7 @@ GraphicView::GraphicView(World* world)
 
 void GraphicView::Init(int height, int width)
 {
-	this->window = new sf::RenderWindow(sf::VideoMode(height, width), "boobs");
+	this->window = new sf::RenderWindow(sf::VideoMode(1980, 1080), "boobs", sf::Style::Fullscreen);
 	this->window->setVerticalSyncEnabled(true);
 	this->event = Event(this->window);
 
@@ -41,7 +41,20 @@ void GraphicView::Init(int height, int width)
 	if (!textureBackground.loadFromFile("../GamJam/res/textures/body/fond.png"))
 		std::cout<<"ERROR : "<<"../GamJam/res/textures/body/fond.png isn't loaded"<<std::endl;
 	this->background.setTexture(textureBackground);
-	this->background.setPosition(0, 0);
+	this->background.setPosition(0, 120);
+
+	if (!lateralTexture.loadFromFile("../GamJam/res/textures/body/lateral.png"))
+		std::cout<<"ERROR : "<<"../GamJam/res/textures/body/fond.png isn't loaded"<<std::endl;
+	this->lateral.setTexture(lateralTexture);
+	this->lateral.setPosition(46*29+15, 0);
+
+	if (!hautTexture.loadFromFile("../GamJam/res/textures/body/haut.png"))
+		std::cout<<"ERROR : "<<"../GamJam/res/textures/body/fond.png isn't loaded"<<std::endl;
+	this->haut.setTexture(hautTexture);
+	this->haut.setPosition(0, 0);
+
+	this->buttons.push_back(Button(10, 10));
+	this->buttons[this->buttons.size()-1].setImage("../GamJam/res/textures/body/bto.png");
 }
 
 int GraphicView::computeEvent()
@@ -64,12 +77,12 @@ int GraphicView::computeEvent()
 	if (this->editor)
 	{
 		float x = sf::Mouse::getPosition(*this->window).x, y = sf::Mouse::getPosition(*this->window).y;
-		if (!(x < 0 || y < 0 || x >this->window->getSize().x || y > this->window->getSize().y))
+		if (!(x < 0 || y < 120 || x > 46*30 || y > this->window->getSize().y))
 		{
-			this->currentSprite.setPosition(x-15, y-15);
+			this->currentSprite.setPosition(x-30, y-30);
 			if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
-				int i = x/30, j = y/30;
+				int i = x/30, j = (y-120)/30;
 				this->world->getMap()->getgrid()[j][i] = this->currentIDTexture;
 				this->world->getWorldObjects()->at(this->world->getMap()->getheight()*j+i).setType(this->currentIDTexture);
 				this->world->getWorldObjects()->at(this->world->getMap()->getheight()*j+i).init(this->world->getNbFrame(this->currentIDTexture));
@@ -90,6 +103,7 @@ void GraphicView::Draw()
 	window->clear(sf::Color::Black);
 
 	window->draw(this->background);
+	
 	for (int i=0; i<this->world->getWorldObjects()->size(); ++i)
 	{
 		this->world->getWorldObjects()->at(i).draw(time);
@@ -98,6 +112,11 @@ void GraphicView::Draw()
 	if (this->editor)
 		window->draw(this->currentSprite);
 	window->draw(*this->world->getPlayer()->getPlayerSprite());
+
+	window->draw(this->lateral);
+	window->draw(this->haut);
+	for (std::vector<Button>::iterator it = this->buttons.begin(); it != this->buttons.end(); ++it)
+		window->draw(*(*it).getSprite());
 
 	window->display();
 
