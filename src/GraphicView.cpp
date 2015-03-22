@@ -73,8 +73,15 @@ int GraphicView::computeEvent()
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
+		/*if (this->play == true)
+		{ 
+			this->play = false;
+		}
+		else
+		{*/
+			this->play = true;
+		//}
 		this->world->getPlayer()->stop();
-		this->play = true;
 	}
 
 	if (0 <= eventID && eventID <= this->blocTextures.size()-1)
@@ -203,7 +210,12 @@ void GraphicView::Draw()
 		window->draw(*(*it).getSprite());
 
 	window->display();
-	
+
+	if (this->world->getPlayer()->getDead() == true)
+	{
+		this->play = false;
+	}
+
 	if (this->play)
 		this->world->getPlayer()->run(this->time);
 

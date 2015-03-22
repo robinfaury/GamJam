@@ -20,6 +20,7 @@ private:
 	int level;
 	int gender; // 0 for Male, 1 for Female
 	int direction; // 0 for Left, 1 for Right
+	int fallsCounter;
 	std::vector<sf::Texture> playerTextureAnim;
 	sf::Texture playerTexture;
 	sf::Sprite player;
@@ -34,6 +35,7 @@ public:
 	Player(glm::vec2 position, glm::vec2 size, Orientation orientation, int gender);
 
 	void init();
+	void initTextures();
 	void run(int time);
 	void stop();
 
@@ -44,6 +46,8 @@ public:
 	int getLevel();
 	int getGender();
 	int getDirection();
+	bool getDead();
+	int getFallsCounter();
 	sf::Sprite* getPlayerSprite() {return &this->player;}
 
 	//-------------------- Setters -----------------------
@@ -53,6 +57,8 @@ public:
 	void setLevel(int level);
 	void setGender(int gender);
 	void setDirection(int direction);
+	void setDead(bool dead);
+	void setFallsCounter(int fallsCounter);
 
 	//------------------ State Changes -------------------
 
@@ -60,6 +66,7 @@ public:
 	void regainLife(double lifeHeal);
 	void loseLife(double lifeDamage);
 	void changeDirection();
+	void incFallsCounter();
 };
 
 #endif //_PLAYER_H
