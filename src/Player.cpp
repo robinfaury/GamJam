@@ -66,21 +66,79 @@ Player::Player(glm::vec2 position, glm::vec2 size, Orientation orientation, int 
 void Player::init()
 {
 	this->direction = 1;
+	this->dead = false;
+	this->fallsCounter = 0;
+	this->gender = 0;
 
-	for (int i=1; i<7; ++i)
-	{
-		std::string filename("../GamJam/res/textures/players/boy/player");
-		filename += std::to_string(i+1) + ".png";
-		this->playerTextureAnim.push_back(sf::Texture());
-		if (!this->playerTextureAnim[this->playerTextureAnim.size()-1].loadFromFile(filename))
-			std::cout<<"ERROR : "<<filename<<std::to_string(i)<<".png isn't loaded"<<std::endl;
-	}
-	if (!this->playerTexture.loadFromFile("../GamJam/res/textures/players/boy/player1.png"))
-		std::cout<<"ERROR : "<<"../GamJam/res/textures/players/boy/player1.png isn't loaded"<<std::endl;
+	initTextures();
 
 	stop();
 }
 
+void Player::initTextures()
+{
+	std::string genderString;
+	if (this->direction == 1)
+	{
+		if (gender == 0)
+		{
+			for (int i = 1; i<7; ++i)
+			{
+				std::string filename("../GamJam/res/textures/players/boy/player");
+				filename += std::to_string(i + 1) + ".png";
+				this->playerTextureAnim.push_back(sf::Texture());
+				if (!this->playerTextureAnim[this->playerTextureAnim.size() - 1].loadFromFile(filename))
+					std::cout << "ERROR : " << filename << std::to_string(i) << ".png isn't loaded" << std::endl;
+			}
+			if (!this->playerTexture.loadFromFile("../GamJam/res/textures/players/boy/player1.png"))
+				std::cout << "ERROR : " << "../GamJam/res/textures/players/boy/player1.png isn't loaded" << std::endl;
+			
+		}
+		else
+		{
+			for (int i = 1; i<6; ++i)
+			{
+				std::string filename("../GamJam/res/textures/players/girl/player");
+				filename += std::to_string(i + 1) + ".png";
+				this->playerTextureAnim.push_back(sf::Texture());
+				if (!this->playerTextureAnim[this->playerTextureAnim.size() - 1].loadFromFile(filename))
+					std::cout << "ERROR : " << filename << std::to_string(i) << ".png isn't loaded" << std::endl;
+			}
+			if (!this->playerTexture.loadFromFile("../GamJam/res/textures/players/girl/player1.png"))
+				std::cout << "ERROR : " << "../GamJam/res/textures/players/girl/player1.png isn't loaded" << std::endl;
+		}
+	}
+	else
+	{
+		if (gender == 0)
+		{
+			for (int i = 1; i<7; ++i)
+			{
+				std::string filename("../GamJam/res/textures/players/boy/player");
+				filename += std::to_string(i + 1) + "b.png";
+				this->playerTextureAnim.push_back(sf::Texture());
+				if (!this->playerTextureAnim[this->playerTextureAnim.size() - 1].loadFromFile(filename))
+					std::cout << "ERROR : " << filename << std::to_string(i) << ".png isn't loaded" << std::endl;
+			}
+			if (!this->playerTexture.loadFromFile("../GamJam/res/textures/players/boy/player1.png"))
+				std::cout << "ERROR : " << "../GamJam/res/textures/players/boy/player1b.png isn't loaded" << std::endl;
+
+		}
+		else
+		{
+			for (int i = 1; i<6; ++i)
+			{
+				std::string filename("../GamJam/res/textures/players/girl/player");
+				filename += std::to_string(i + 1) + "b.png";
+				this->playerTextureAnim.push_back(sf::Texture());
+				if (!this->playerTextureAnim[this->playerTextureAnim.size() - 1].loadFromFile(filename))
+					std::cout << "ERROR : " << filename << std::to_string(i) << ".png isn't loaded" << std::endl;
+			}
+			if (!this->playerTexture.loadFromFile("../GamJam/res/textures/players/girl/player1.png"))
+				std::cout << "ERROR : " << "../GamJam/res/textures/players/girl/player1b.png isn't loaded" << std::endl;
+		}
+	}
+}
 void Player::run(int time)
 {
 	if (time%7==0)
@@ -125,6 +183,16 @@ int Player::getDirection()
 	return direction;
 }
 
+bool Player::getDead()
+{
+	return dead;
+}
+
+int Player::getFallsCounter()
+{
+	return fallsCounter;
+}
+
 //-------------------- Setters -----------------------
 
 void Player::setLife(double life)
@@ -150,6 +218,16 @@ void Player::setGender(int gender)
 void Player::setDirection(int direction)
 {
 	this->direction = direction;
+}
+
+void Player::setDead(bool dead)
+{
+	this->dead = dead;
+}
+
+void Player::setFallsCounter(int fallsCounter)
+{
+	this->fallsCounter = fallsCounter;
 }
 
 //------------------ State Changes -------------------
@@ -192,4 +270,9 @@ void Player::changeDirection()
 	{
 		direction = 0;
 	}
+}
+
+void Player::incFallsCounter()
+{
+	this->fallsCounter++;
 }

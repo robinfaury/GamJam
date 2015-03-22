@@ -25,6 +25,7 @@ public:
 	void run();
 	void Physique();
 	void detectCollision(glm::vec2 nextPosition);
+	void printWorld();
 
 	~Game();
 };
