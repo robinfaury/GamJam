@@ -11,18 +11,24 @@
 #include <iostream>
 
 
-class Button { 
+class Button 
+{ 
 private:
 	int x, y,hauteur,largeur,id;
 	std::string nom;
+	sf::Texture texture;
+	sf::Sprite sprite;
 
 public:
 	
 	Button();
-	Button(int, int, int, int, std::string,int);
+	Button(int x, int y);
 	~Button();
 	int verif(int, int);
 	void setImage(std::string path);
+
+	sf::Sprite* getSprite() {return &this->sprite;}
+
 };
 
 #endif //_BUTTON_H

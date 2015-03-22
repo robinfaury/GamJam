@@ -17,7 +17,7 @@ Game::Game()
 void Game::init()
 {
 	this->changeLevel(1);
-	this->SFMLView.Init(this->world.getMap()->getheight()*30, this->world.getMap()->getwidth()*30);
+	this->SFMLView.Init(0, 0);
 	this->world.getPlayer()->init();
 	for (int i=0; i<this->world.getWorldObjects()->size(); ++i)
 		this->world.getWorldObjects()->at(i).init(this->world.getNbFrame(this->world.getWorldObjects()->at(i).getType()));
@@ -51,7 +51,7 @@ void Game::Physique()
 	{
 		Player* player = this->world.getPlayer();
 
-		int i = player->getPosition().x/30, j = player->getPosition().y/30;
+		int i = player->getPosition().x/30, j = (player->getPosition().y-120)/30;
 		std::cout<<i<<j<<this->world.getMap()->getgrid()[j][i]<<"|";
 		if (this->world.getMap()->getgrid()[j][i] == 0)
 		{

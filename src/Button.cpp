@@ -9,37 +9,20 @@
  * Button implementation
  */ 
 
-Button::Button(int a, int b, int c, int d, std::string path,int idd){
+Button::Button(int a, int b)
+{
 	x = a;
 	y = b;
-	hauteur = c;
-	largeur = d;
-	nom = path;
-	id = idd;
-
-	sf::Texture Image;
-	sf::Sprite Sprite;
-
-
-	if (!Image.loadFromFile(path+".png"))
-	{
-		// Erreur...
-	}
-	Image.setSmooth(true);
-	Sprite.setTexture(Image);
 }
 
-void Button::setImage(std::string path){
-	sf::Texture Image;
-	sf::Sprite Sprite;
+void Button::setImage(std::string path)
+{
 
 
-	if (!Image.loadFromFile( nom+path  + ".png"))
+	if (!this->texture.loadFromFile( path ))
 	{
-		// Erreur...
 	}
-	Image.setSmooth(true);
-	Sprite.setTexture(Image);
+	sprite.setTexture(texture);
 }
 
 Button::Button(void)

@@ -52,7 +52,7 @@ InfoBull::InfoBull(std::string s)
 	// création de la fenêtre
 	sf::RenderWindow window(sf::VideoMode(900, 600), "My window");
 	window.setSize(sf::Vector2u(a*26+100, a*22));
-	text.move( 6*a+75, 150);
+	text.move( 6*a+75, 120);
 	// on fait tourner le programme tant que la fenêtre n'a pas été fermée
 	while (window.isOpen())
 	{
