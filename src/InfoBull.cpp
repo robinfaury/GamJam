@@ -12,7 +12,7 @@
 
 InfoBull::InfoBull(std::string s)
 {
-	/*
+	
 	sf::Text text;
 	sf::Font font;
 
@@ -75,7 +75,7 @@ InfoBull::InfoBull(std::string s)
 		// fin de la frame courante, affichage de tout ce qu'on a dessiné
 		window.display();
 	}
-	*/
+	
 
 }
 

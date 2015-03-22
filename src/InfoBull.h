@@ -15,8 +15,6 @@ class InfoBull {
 public:
 	InfoBull(std::string);
 
-	~InfoBull(void);
-
 
 
 };
